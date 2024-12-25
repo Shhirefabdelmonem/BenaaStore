@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenaaStore", "BenaaStore\BenaaStore.csproj", "{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC30E189-FD9A-4D56-82EF-91B490795D73}
+	EndGlobalSection
+EndGlobal
