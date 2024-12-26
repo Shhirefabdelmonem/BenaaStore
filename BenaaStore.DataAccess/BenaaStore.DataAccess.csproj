@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BenaaStore.DataAccess\BenaaStore.DataAccess.csproj" />
+    <ProjectReference Include="..\BenaaStore.Models\BenaaStore.Models.csproj" />
+    <ProjectReference Include="..\BenaaStore.Utility\BenaaStore.Utility.csproj" />
   </ItemGroup>
 
 </Project>

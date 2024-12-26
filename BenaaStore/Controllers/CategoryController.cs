@@ -1,15 +1,16 @@
-﻿using BenaaStore.Models;
+﻿using BenaaStore.DataAccess.Repository.IRepository;
+using BenaaStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BenaaStore.Controllers
 {
-    public class CategoryController(ApplicationDbContext context) : Controller
+    public class CategoryController(IUnitOfWork unitOfWork) : Controller
     {
-        private readonly ApplicationDbContext context = context;
+        
 
         public IActionResult Index()
         {
-            var CategoryList=context.Categories.ToList();
+            var CategoryList= unitOfWork.Category.GetAll();
             return View(CategoryList);
         }
 
@@ -27,8 +28,8 @@ namespace BenaaStore.Controllers
             if (!ModelState.IsValid) 
                 return View(category);
             
-            context.Categories.Add(category);
-            context.SaveChanges();
+           unitOfWork.Category.Add(category);
+            unitOfWork.Save();
             TempData["success"] = "Category created successfullty";
             return RedirectToAction("index");
         }
@@ -37,7 +38,7 @@ namespace BenaaStore.Controllers
         {
             if (id==null || id ==0)
                 return NotFound();
-            var CategoryFromDb=context.Categories.FirstOrDefault(c=>c.CategoryId==id);
+            var CategoryFromDb=unitOfWork.Category.Get(c=>c.CategoryId==id);
             return View(CategoryFromDb);
         }
         [HttpPost]
@@ -51,8 +52,8 @@ namespace BenaaStore.Controllers
             if (!ModelState.IsValid)
                 return View(category);
 
-            context.Categories.Update(category);
-            context.SaveChanges();
+           unitOfWork.Category.Update(category);
+            unitOfWork.Save();
             TempData["success"] = "Category Updated successfullty";
             return RedirectToAction("index");
         }
@@ -61,19 +62,19 @@ namespace BenaaStore.Controllers
         {
             if (id == null || id == 0)
                 return NotFound();
-            var CategoryFromDb = context.Categories.FirstOrDefault(c => c.CategoryId == id);
+            var CategoryFromDb = unitOfWork.Category.Get(c => c.CategoryId == id);
             return View(CategoryFromDb);
         }
         [HttpPost,ActionName("Delete")]
         public IActionResult DeletePost(int ?id)
         {
-            var model = context.Categories.Find(id);
+            var model = unitOfWork.Category.Get(c => c.CategoryId == id);
             if (model==null)
             {
                 return NotFound();
             }
-            context.Categories.Remove(model);
-            context.SaveChanges();
+            unitOfWork.Category.Remove(model);
+            unitOfWork.Save();
             TempData["success"] = "Category Deleted successfullty";
             return RedirectToAction("index");
         }
