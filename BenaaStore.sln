@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenaaStore", "BenaaStore\BenaaStore.csproj", "{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BenaaStore", "BenaaStore\BenaaStore.csproj", "{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenaaStore.DataAccess", "BenaaStore.DataAccess\BenaaStore.DataAccess.csproj", "{34AF44A1-969A-4818-817B-A813B8C47F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenaaStore.Utility", "BenaaStore.Utility\BenaaStore.Utility.csproj", "{B2148B03-9CAB-47D4-AA0A-226C1439675D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenaaStore.Models", "BenaaStore.Models\BenaaStore.Models.csproj", "{5136D49E-79D8-4A3B-ABF9-2FFE93A382A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1AEBF7-F9A5-4F73-889A-A0012DC9317B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34AF44A1-969A-4818-817B-A813B8C47F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34AF44A1-969A-4818-817B-A813B8C47F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34AF44A1-969A-4818-817B-A813B8C47F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34AF44A1-969A-4818-817B-A813B8C47F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2148B03-9CAB-47D4-AA0A-226C1439675D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2148B03-9CAB-47D4-AA0A-226C1439675D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2148B03-9CAB-47D4-AA0A-226C1439675D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2148B03-9CAB-47D4-AA0A-226C1439675D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5136D49E-79D8-4A3B-ABF9-2FFE93A382A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5136D49E-79D8-4A3B-ABF9-2FFE93A382A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5136D49E-79D8-4A3B-ABF9-2FFE93A382A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5136D49E-79D8-4A3B-ABF9-2FFE93A382A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
