@@ -2,15 +2,16 @@
 using BenaaStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BenaaStore.Controllers
+namespace BenaaStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController(IUnitOfWork unitOfWork) : Controller
     {
-        
+
 
         public IActionResult Index()
         {
-            var CategoryList= unitOfWork.Category.GetAll();
+            var CategoryList = unitOfWork.Category.GetAll();
             return View(CategoryList);
         }
 
@@ -25,26 +26,26 @@ namespace BenaaStore.Controllers
             {
                 ModelState.AddModelError("Name", "The Display Order Cannot exactly match the Name");
             }
-            if (!ModelState.IsValid) 
-                return View(category);
-            
-           unitOfWork.Category.Add(category);
+            if (!ModelState.IsValid)
+                return View();
+
+            unitOfWork.Category.Add(category);
             unitOfWork.Save();
             TempData["success"] = "Category created successfullty";
             return RedirectToAction("index");
         }
 
-        public IActionResult Edit(int ?id)
+        public IActionResult Edit(int? id)
         {
-            if (id==null || id ==0)
+            if (id == null || id == 0)
                 return NotFound();
-            var CategoryFromDb=unitOfWork.Category.Get(c=>c.CategoryId==id);
+            var CategoryFromDb = unitOfWork.Category.Get(c => c.CategoryId == id);
             return View(CategoryFromDb);
         }
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            
+
             if (category.Name == category.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("Name", "The Display Order Cannot exactly match the Name");
@@ -52,7 +53,7 @@ namespace BenaaStore.Controllers
             if (!ModelState.IsValid)
                 return View(category);
 
-           unitOfWork.Category.Update(category);
+            unitOfWork.Category.Update(category);
             unitOfWork.Save();
             TempData["success"] = "Category Updated successfullty";
             return RedirectToAction("index");
@@ -65,11 +66,11 @@ namespace BenaaStore.Controllers
             var CategoryFromDb = unitOfWork.Category.Get(c => c.CategoryId == id);
             return View(CategoryFromDb);
         }
-        [HttpPost,ActionName("Delete")]
-        public IActionResult DeletePost(int ?id)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
         {
             var model = unitOfWork.Category.Get(c => c.CategoryId == id);
-            if (model==null)
+            if (model == null)
             {
                 return NotFound();
             }
