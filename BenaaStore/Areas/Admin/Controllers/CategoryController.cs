@@ -1,10 +1,13 @@
 ﻿using BenaaStore.DataAccess.Repository.IRepository;
 using BenaaStore.Models;
+using BenaaStore.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BenaaStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(SD.Role_Admin)]
     public class CategoryController(IUnitOfWork unitOfWork) : Controller
     {
 

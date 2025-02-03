@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BenaaStore.DataAccess.Repository
 {
@@ -20,19 +21,35 @@ namespace BenaaStore.DataAccess.Repository
         public void Add(T entity)
         {
             context.Set<T>().Add(entity);
+            
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProp = null)
         {
             IQueryable<T> query = context.Set<T>();
             query=query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProp))
+            {
+                foreach (var prop in includeProp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
            return  query.FirstOrDefault();
 
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProp = null)
         {
-            return context.Set<T>().ToList();
+            IQueryable<T> query = context.Set<T>();
+            if (!string.IsNullOrEmpty(includeProp))
+            {
+                foreach (var prop in includeProp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
+            return query.ToList();
         }
 
         public void Remove(T entity)
