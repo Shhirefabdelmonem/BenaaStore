@@ -1,7 +1,15 @@
 using BenaaStore.DataAccess.Repository.IRepository;
 using BenaaStore.Models;
+using BenaaStore.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Security.Claims;
+using System.Security.Permissions;
+using Microsoft.AspNetCore.Identity;
 
 namespace BenaaStore.Areas.Customer.Controllers
 {
@@ -23,10 +31,43 @@ namespace BenaaStore.Areas.Customer.Controllers
             return View(ProductList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int ProductId)
         {
-            var Product = unitOfWork.Product.Get(p => p.Id == id, includeProp: "Category");
-            return View(Product); 
+            ShoppingCart Cart = new()
+            {
+                Product = unitOfWork.Product.Get(p => p.Id == ProductId, includeProp: "Category"),
+                ProductId = ProductId,
+                Count = 1
+            };
+            return View(Cart);
+        }
+        public ApplicationUser ApplicationUser { get; set; }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart cart)
+        {
+            // Adds a product to the user's shopping cart and associates it with the authenticated user
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var UserId= claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            cart.ApplicationUserId = UserId;
+
+            var cartDb = unitOfWork.ShoppingCart.Get(c => c.ProductId == cart.ProductId && c.ApplicationUserId == cart.ApplicationUserId);
+            if (cartDb != null)
+            {
+                cartDb.Count += cart.Count;
+                unitOfWork.ShoppingCart.update(cartDb);
+            }
+            else
+            {
+                unitOfWork.ShoppingCart.Add(cart);
+            }
+
+            TempData["success"] = "Cart updated successfully";
+            unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));
+
+
         }
 
         public IActionResult Privacy()

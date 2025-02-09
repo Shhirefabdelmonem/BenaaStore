@@ -10,6 +10,11 @@ namespace BenaaStore.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        ICompanyRepository Company { get; }
+        IShopingCartRepository ShoppingCart { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+        IOrderDetailsRepository OrderDetails { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

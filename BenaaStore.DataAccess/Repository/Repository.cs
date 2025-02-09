@@ -24,9 +24,17 @@ namespace BenaaStore.DataAccess.Repository
             
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProp = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProp = null,bool tracked=false)
         {
-            IQueryable<T> query = context.Set<T>();
+            IQueryable<T> query;
+            if (tracked)
+            {
+                query = context.Set<T>();
+            }
+            else
+            {
+                query= context.Set<T>().AsNoTracking();
+            }
             query=query.Where(filter);
             if (!string.IsNullOrEmpty(includeProp))
             {
@@ -39,9 +47,13 @@ namespace BenaaStore.DataAccess.Repository
 
         }
 
-        public IEnumerable<T> GetAll(string? includeProp = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null,string? includeProp = null)
         {
             IQueryable<T> query = context.Set<T>();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
             if (!string.IsNullOrEmpty(includeProp))
             {
                 foreach (var prop in includeProp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

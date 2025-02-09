@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BenaaStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(SD.Role_Admin)]
+   // [Authorize(SD.Role_Admin)]
     public class CategoryController(IUnitOfWork unitOfWork) : Controller
     {
 

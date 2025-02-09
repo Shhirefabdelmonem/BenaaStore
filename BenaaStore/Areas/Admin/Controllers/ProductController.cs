@@ -16,7 +16,7 @@ using NuGet.Protocol.Plugins;
 namespace BenaaStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(SD.Role_Admin)]
+    //[Authorize(SD.Role_Admin)]
     public class ProductController(IUnitOfWork unitOfWork,IWebHostEnvironment webHostEnvironment) : Controller
     {
 
