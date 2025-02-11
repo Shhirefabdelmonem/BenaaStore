@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BenaaStore.Utility;
+using Stripe;
+using Microsoft.Extensions.Configuration;
 
 
 namespace BenaaStore
@@ -19,6 +21,7 @@ namespace BenaaStore
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("cs")));
 
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             
             builder.Services.ConfigureApplicationCookie(options => {
@@ -44,6 +47,7 @@ namespace BenaaStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
             app.UseRouting();
 
             app.UseAuthentication();
